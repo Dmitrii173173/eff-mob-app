@@ -1,8 +1,11 @@
-[build]
-builder = "nixpacks"
-buildCommand = "npm install && tsc && npx prisma generate || true"
-
-[deploy]
-startCommand = "npm start"
-healthcheckPath = "/"
-healthcheckTimeout = 100
+{
+  "build": {
+    "builder": "nixpacks",
+    "buildCommand": "npm install && npx prisma generate && tsc"
+  },
+  "deploy": {
+    "startCommand": "npm start",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 100
+  }
+}
