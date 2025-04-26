@@ -1,0 +1,12 @@
+{
+  "name": "EM API",
+  "description": "Node / Express / Prisma API for EM project",
+  "keywords": ["node", "express", "prisma", "em"],
+  "addons": ["heroku-postgresql"],
+  "env": {
+    "JWT_SECRET": {
+      "description": "A secret key for verifying authenticated users",
+      "generator": "secret"
+    }
+  }
+}
