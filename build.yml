@@ -1,0 +1,8 @@
+build:
+  commands:
+    - npm ci
+    - npx prisma generate || true
+    - npm run build
+
+start:
+  command: npm start
