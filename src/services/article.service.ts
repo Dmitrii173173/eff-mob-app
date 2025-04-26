@@ -101,9 +101,11 @@ export const getArticles = async (query: any, username?: string) => {
     articles: articles.map(({ authorId, id, _count, favoritedBy, ...article }) => ({
       ...article,
       author: profileMapper(article.author, username),
-      tagList: article.tagList.map(tag => tag.name),
+      // tagList: article.tagList.map(tag => tag.name),
+      tagList: article.tagList.map((tag: { name: string }) => tag.name),
       favoritesCount: _count?.favoritedBy,
-      favorited: favoritedBy.some(item => item.username === username),
+      // favorited: favoritedBy.some(item => item.username === username),
+      favorited: favoritedBy.some((item: { username: string }) => item.username === username),
     })),
     articlesCount,
   };
