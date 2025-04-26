@@ -5,9 +5,9 @@ import { findUserIdByUsername } from './auth.service';
 import profileMapper from '../utils/profile.utils';
 
 const buildFindAllQuery = (query: any, username: string | undefined) => {
-  const queries: any = [];
-  const orAuthorQuery = [];
-  const andAuthorQuery = [];
+  const queries: any[] = [];
+  const orAuthorQuery: any[] = [];
+  const andAuthorQuery: any[] = []; 
 
   if (username) {
     orAuthorQuery.push({
@@ -101,6 +101,7 @@ export const getArticles = async (query: any, username?: string) => {
     articles: articles.map(({ authorId, id, _count, favoritedBy, ...article }) => ({
       ...article,
       author: profileMapper(article.author, username),
+      
       // tagList: article.tagList.map(tag => tag.name),
       tagList: article.tagList.map((tag: { name: string }) => tag.name),
       favoritesCount: _count?.favoritedBy,
@@ -329,12 +330,12 @@ export const updateArticle = async (article: any, slug: string, username: string
     }
   }
 
-  const tagList = article.tagList?.length
-    ? article.tagList.map((tag: string) => ({
-        create: { name: tag },
-        where: { name: tag },
-      }))
-    : [];
+  const tagList: any[] = article.tagList?.length
+  ? article.tagList.map((tag: string) => ({
+      create: { name: tag },
+      where: { name: tag },
+    }))
+  : [];
 
   await disconnectArticlesTags(slug);
 
